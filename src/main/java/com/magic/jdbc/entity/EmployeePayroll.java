@@ -5,12 +5,14 @@ public class EmployeePayroll {
     private String name;
     private String salary;
     private String startDate;
+    private String gender;
 
-    public EmployeePayroll(int id, String name, String salary, String startDate) {
+    public EmployeePayroll(int id, String name, String salary, String startDate,String gender) {
         this.id = id;
         this.name = name;
         this.salary = salary;
         this.startDate = startDate;
+        this.gender=gender;
     }
 
     public int getId() {
