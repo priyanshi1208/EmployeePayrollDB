@@ -1,0 +1,6 @@
+com/magic/jdbc/entity/EmployeePayroll.java
+ com.magic.jdbc.entity.EmployeePayroll
+com/magic/jdbc/service/Operation.java
+ com.magic.jdbc.service.Operation
+com/magic/jdbc/utility/JDBCConnection.java
+ com.magic.jdbc.utility.JDBCConnection
