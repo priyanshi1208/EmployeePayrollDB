@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class EmployeePayrollTest {
     @Test
@@ -22,5 +23,11 @@ public class EmployeePayrollTest {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @Test
+    void givenUpdatedSalary_updateSalaryInDbAndPayrollObject_returnsTrueIfDataMatches() {
+        Operation operation=new Operation();
+        Assertions.assertEquals("300000",operation.UpdatedEmployeeObject("priyanshi").get(0).getSalary());
     }
 }
