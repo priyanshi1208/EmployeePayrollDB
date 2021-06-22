@@ -23,7 +23,7 @@ public class Operation {
           String sql = String.format("select * from payrollService where name='%s'", name);
            retrieveFromDb(sql).forEach(employeePayroll -> {
                   if (employeePayroll.getName().equals(name)) {
-                      String salary = employeePayroll.getSalary();
+                      employeePayroll.getSalary();
                   }
            });
       return list;
@@ -50,13 +50,55 @@ public class Operation {
   public List<EmployeePayroll> retrieveTable(){
       return retrieveFromDb("Select * from payrollService");
   }
-  public void addEmployeeToPayroll(){
+  public void addEmployeeToPayroll(int id,String name,double salary,LocalDate startDate,String gender){
       try {
           jdbcConnection.createConnection(String.format("Insert into payrollService (id,name,salary,startDate,gender) values ('%s','%s','%s','%s','%s')",
-                    2,"Ayush","200000","20-02-2020","male")).executeUpdate();
+                   id,name,salary,Date.valueOf(startDate),gender)).executeUpdate();
       } catch (SQLException throwables) {
           throwables.printStackTrace();
       }
+  }
+  public List<EmployeePayroll> addIntoPayrollDetails(int id, String name, double salary, LocalDate startDate, String gender){
+      try {
+          jdbcConnection.getConnection().setAutoCommit(false);
+      } catch (SQLException throwables) {
+          throwables.printStackTrace();
+      }
+      addEmployeeToPayroll(id, name, salary, startDate, gender);
+      try {
+          jdbcConnection.getConnection().rollback();
+      } catch (SQLException throwables) {
+          throwables.printStackTrace();
+      }
+      double deductions = salary * 0.2;
+      double taxablePay = salary - deductions;
+      double tax = taxablePay * 0.1;
+      double netPay = salary - tax;
+
+      try {
+          jdbcConnection.createConnection(String
+                  .format("INSERT INTO payroll_details(id, basic_pay, deductions, taxable_Pay, tax, net_Pay)"
+                          + "VALUES( %s,%s, %s, %s, %s, %s)",id, salary, deductions, taxablePay, tax, netPay)).executeUpdate();
+           list = retrieveTable();
+      } catch (SQLException throwables) {
+          throwables.printStackTrace();
+      }
+      try {
+          jdbcConnection.getConnection().rollback();
+      } catch (SQLException throwables) {
+          throwables.printStackTrace();
+      }
+      try {
+          jdbcConnection.getConnection().commit();
+      } catch (SQLException throwables) {
+          throwables.printStackTrace();
+      }
+      try {
+          jdbcConnection.getConnection().close();
+      } catch (SQLException throwables) {
+          throwables.printStackTrace();
+      }
+    return list;
   }
 }
 
