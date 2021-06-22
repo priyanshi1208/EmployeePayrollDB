@@ -37,4 +37,10 @@ public class EmployeePayrollTest {
         LocalDate endDate = LocalDate.now();
         Assertions.assertEquals("priyanshi",operation.employeeWithinDateRange(startDate,endDate).get(0).getName());
     }
+
+    @Test
+    void GivenNewEmployeeData_InsertIntoDb_retrieveInObjectAndCompare() {
+        Operation operation=new Operation();
+        Assertions.assertEquals("Ayush",operation.retrieveTable().get(1).getName());
+    }
 }

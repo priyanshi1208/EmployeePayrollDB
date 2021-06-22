@@ -25,7 +25,7 @@ public class Operation {
                   if (employeePayroll.getName().equals(name)) {
                       String salary = employeePayroll.getSalary();
                   }
-                   });
+           });
       return list;
   }
   public List<EmployeePayroll> employeeWithinDateRange(LocalDate date1,LocalDate date2){
@@ -46,6 +46,17 @@ public class Operation {
           throwables.printStackTrace();
       }
       return null;
+  }
+  public List<EmployeePayroll> retrieveTable(){
+      return retrieveFromDb("Select * from payrollService");
+  }
+  public void addEmployeeToPayroll(){
+      try {
+          jdbcConnection.createConnection(String.format("Insert into payrollService (id,name,salary,startDate,gender) values ('%s','%s','%s','%s','%s')",
+                    2,"Ayush","200000","20-02-2020","male")).executeUpdate();
+      } catch (SQLException throwables) {
+          throwables.printStackTrace();
+      }
   }
 }
 
