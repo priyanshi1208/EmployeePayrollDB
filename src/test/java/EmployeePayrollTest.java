@@ -48,7 +48,7 @@ public class EmployeePayrollTest {
     void GivenNewEmployeeData_AddsNewTableInDb_ReturnsDetailsFromNewTable() {
         Operation operation=new Operation();
         LocalDate date=LocalDate.of(2020,02,03);
-        operation.addIntoPayrollDetails(3,"saumya",200000,date,"female");
-        Assertions.assertEquals(200000,operation.retrieveTable().get(2).getSalary());
+        operation.addIntoPayrollDetails(6,"saumya",200000,date,"female");
+        Assertions.assertEquals(200000.0,operation.retrieveTable().get(2).getSalary());
     }
 }

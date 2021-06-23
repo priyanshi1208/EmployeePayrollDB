@@ -3,11 +3,11 @@ package com.magic.jdbc.entity;
 public class EmployeePayroll {
     private int id;
     private String name;
-    private String salary;
+    private double salary;
     private String startDate;
     private String gender;
 
-    public EmployeePayroll(int id, String name, String salary, String startDate,String gender) {
+    public EmployeePayroll(int id, String name, double salary, String startDate,String gender) {
         this.id = id;
         this.name = name;
         this.salary = salary;
@@ -31,11 +31,11 @@ public class EmployeePayroll {
         this.name = name;
     }
 
-    public String getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
