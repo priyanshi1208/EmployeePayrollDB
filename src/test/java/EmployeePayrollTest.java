@@ -27,7 +27,7 @@ public class EmployeePayrollTest {
     @Test
     void givenUpdatedSalary_updateSalaryInDbAndPayrollObject_returnsTrueIfDataMatches() {
         Operation operation=new Operation();
-        Assertions.assertEquals("300000",operation.UpdatedEmployeeObject("priyanshi").get(0).getSalary());
+        Assertions.assertEquals("300000",operation.UpdatedEmployeeObject(1,200000).get(0).getSalary());
     }
 
     @Test
